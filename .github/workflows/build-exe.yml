@@ -1,0 +1,42 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Tool version (published ZIP se build hoga, masalan 7.7)'
+        required: true
+        default: '7.7'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Download published ZIP
+        shell: powershell
+        run: |
+          $v = "${{ inputs.version }}"
+          Invoke-WebRequest -Uri "https://hamzaagsm.github.io/gsmtool/HamzaGSMTool-v$v.zip" -OutFile tool.zip
+          Expand-Archive -Path tool.zip -DestinationPath src
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+      - name: Download platform-tools
+        shell: powershell
+        run: |
+          Invoke-WebRequest -Uri 'https://dl.google.com/android/repository/platform-tools-latest-windows.zip' -OutFile pt.zip
+          Expand-Archive -Path pt.zip -DestinationPath pt
+      - name: Build EXE
+        shell: powershell
+        run: |
+          cd src/HamzaGSMTool
+          pyinstaller --onefile --windowed --name HamzaGSMTool --add-data "$env:GITHUB_WORKSPACE/pt/platform-tools;platform-tools" app.py
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: HamzaGSMTool-v${{ inputs.version }}-win64
+          path: src/HamzaGSMTool/dist/HamzaGSMTool.exe
+          if-no-files-found: error
