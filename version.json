@@ -1,5 +1,5 @@
 {
-  "version": "7.7.2",
-  "download_url": "https://hamzaagsm.github.io/gsmtool/HamzaGSMTool-v7.7.2.zip",
-  "notes": "Reliability fix: onedir build (no temp extract) + startup stage logging."
+  "version": "7.7.3",
+  "download_url": "https://hamzaagsm.github.io/gsmtool/HamzaGSMTool-v7.7.3.zip",
+  "notes": "Pehli run par koi login dialog nahi -- admin auto-banega, app seedha khulegi."
 }
