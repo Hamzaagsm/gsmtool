@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamza GSM Tool — Download</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1e1e2e; color: #e8e8f0; font-family: Arial, sans-serif; }
+  .hero { background: #7c6cf0; padding: 56px 20px; text-align: center; }
+  .hero h1 { font-size: 42px; letter-spacing: 2px; }
+  .hero p { color: #e0dcff; margin-top: 10px; font-size: 17px; }
+  .badge { display: inline-block; background: #00d4aa; color: #1e1e2e;
+           font-weight: bold; padding: 8px 22px; border-radius: 24px;
+           margin-top: 22px; font-size: 16px; }
+  .dl { display: inline-block; background: #00d4aa; color: #1e1e2e; font-weight: bold;
+        font-size: 20px; padding: 16px 48px; border-radius: 10px; text-decoration: none;
+        margin-top: 18px; }
+  .dl:hover { background: #00f0c0; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px; }
+  h2 { color: #7c6cf0; margin: 30px 0 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .card { background: #2a2a3e; border-radius: 10px; padding: 18px; }
+  .card b { color: #00d4aa; }
+  .warn { background: #4a2a2a; border-left: 5px solid #ff5c5c; padding: 14px 18px;
+          border-radius: 6px; margin-top: 16px; }
+  code { background: #31314a; padding: 2px 8px; border-radius: 5px; color: #00d4aa; }
+  footer { text-align: center; color: #a0a0b8; padding: 30px; font-size: 14px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <h1>HAMZA GSM TOOL</h1>
+    <p>Mobile Servicing Toolkit &bull; Pakistan Edition</p>
+    <div><span class="badge" id="ver">v…</span></div><br>
+    <a class="dl" id="dlbtn" href="#">⬇ Download for Windows</a>
+    <p style="font-size:13px; margin-top:12px;">ZIP download karo &rarr; extract karo &rarr; <code>INSTALL.bat</code> chalao &mdash; bas!</p>
+  </div>
+  <div class="wrap">
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card"><b>🔐 Login System</b><br>Admin + users, block/unblock, password reset.</div>
+      <div class="card"><b>🏷️ 13 Brands</b><br>Tecno, Infinix, Samsung, Xiaomi… 91+ models database.</div>
+      <div class="card"><b>📡 META Mode</b><br>MTK IMEI/NVRAM work area (dedicated tab).</div>
+      <div class="card"><b>🟣 SPD / Unisoc</b><br>Dedicated section + guides.</div>
+      <div class="card"><b>🆔 Transsion ID</b><br>Tecno/Infinix/Itel ID-lock app scan &amp; disable.</div>
+      <div class="card"><b>🔄 Auto-Update</b><br>Tool khud naye version check karta hai.</div>
+    </div>
+    <h2>Requirements</h2>
+    <p>Windows 10/11 PC &bull; USB drivers (chipset ke hisaab se) &bull; Phone me USB debugging ON</p>
+    <div class="warn"><b>Note:</b> Sirf apne ya customer ke consent wale phones par use karo. IMEI sirf original restore karo &mdash; Pakistan me IMEI tamper illegal hai (PTA).</div>
+    <h2>Changelog</h2>
+    <p id="notes">Latest updates yahan nazar aayenge.</p>
+  </div>
+  <footer>Hamza GSM Tool &bull; For professional mobile technicians</footer>
+<script>
+  fetch('version.json').then(r => r.json()).then(v => {
+    document.getElementById('ver').textContent = 'v' + v.version;
+    document.getElementById('dlbtn').href = v.download_url;
+    if (v.notes) document.getElementById('notes').textContent = 'v' + v.version + ': ' + v.notes;
+  }).catch(() => {
+    document.getElementById('ver').textContent = 'v6.0';
+    document.getElementById('notes').textContent = 'Download button ke liye version.json zaroori hai.';
+  });
+</script>
+</body>
+</html>
