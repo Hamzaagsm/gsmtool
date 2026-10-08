@@ -36,16 +36,17 @@ jobs:
         shell: powershell
         run: |
           cd src/HamzaGSMTool
-          pyinstaller --onefile --windowed --name HamzaGSMTool --add-data "$env:GITHUB_WORKSPACE/pt/platform-tools;platform-tools" app.py
+          pyinstaller --onedir --windowed --name HamzaGSMTool --add-data "$env:GITHUB_WORKSPACE/pt/platform-tools;platform-tools" app.py
+          Compress-Archive -Path dist/HamzaGSMTool -DestinationPath $env:GITHUB_WORKSPACE/HamzaGSMTool-win64.zip -Force
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: HamzaGSMTool-v${{ inputs.version }}-win64
-          path: src/HamzaGSMTool/dist/HamzaGSMTool.exe
+          path: HamzaGSMTool-win64.zip
           if-no-files-found: error
       - name: Publish public release with EXE
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ inputs.version }}-exe
           name: HamzaGSMTool v${{ inputs.version }} (Windows EXE)
-          files: src/HamzaGSMTool/dist/HamzaGSMTool.exe
+          files: HamzaGSMTool-win64.zip
