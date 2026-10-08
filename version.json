@@ -1,5 +1,1 @@
-{
-  "version": "7.7.3",
-  "download_url": "https://hamzaagsm.github.io/gsmtool/HamzaGSMTool-v7.7.3.zip",
-  "notes": "Pehli run par koi login dialog nahi -- admin auto-banega, app seedha khulegi."
-}
+{"download_url":"https://hamzaagsm.github.io/gsmtool/HamzaGSMTool-v8.0.zip","notes":"v8.0 Pro UI: UnlockTool-style simple interface -- Brand bar, Mode tabs (ADB/FASTBOOT/META/EDL-BROM/TOOLS), Model list, Functions list, big START button. 224 models. Sab buttons asal kaam karte hain.","version":"8.0"}
