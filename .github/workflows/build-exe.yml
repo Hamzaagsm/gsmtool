@@ -1,5 +1,8 @@
 name: Build Windows EXE
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -34,9 +37,15 @@ jobs:
         run: |
           cd src/HamzaGSMTool
           pyinstaller --onefile --windowed --name HamzaGSMTool --add-data "$env:GITHUB_WORKSPACE/pt/platform-tools;platform-tools" app.py
-      - name: Upload EXE
+      - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: HamzaGSMTool-v${{ inputs.version }}-win64
           path: src/HamzaGSMTool/dist/HamzaGSMTool.exe
           if-no-files-found: error
+      - name: Publish public release with EXE
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ inputs.version }}-exe
+          name: HamzaGSMTool v${{ inputs.version }} (Windows EXE)
+          files: src/HamzaGSMTool/dist/HamzaGSMTool.exe
