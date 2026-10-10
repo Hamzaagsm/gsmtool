@@ -1,0 +1,17 @@
+name: Rename v8.4 source ZIP
+on:
+  workflow_dispatch:
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename ZIP via git mv
+        run: |
+          git config user.name "hamzaagsm"
+          git config user.email "hamzaagsm@users.noreply.github.com"
+          git mv gsmtool-v8.4-source.zip HamzaGSMTool-v8.4.zip
+          git commit -m "Rename gsmtool-v8.4-source.zip to HamzaGSMTool-v8.4.zip"
+          git push
