@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL BADAR MOBILE — Sanawan</title>
+<meta name="description" content="AL BADAR MOBILE, Sanawan — Naye mobile qiston par, repairing, software aur accessories. WhatsApp par rabta karein.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background:#0b1220; color:#eef2f7; min-height:100vh; display:flex; justify-content:center; padding:18px 12px 40px; }
+  .card { width:100%; max-width:430px; }
+  .head { text-align:center; padding:26px 16px 18px; background:linear-gradient(160deg,#12263f,#0d3b2e); border-radius:20px; border:1px solid #1f3a52; }
+  .logo { font-size:46px; }
+  h1 { font-size:27px; letter-spacing:1px; margin-top:8px; color:#ffd34d; }
+  .owner { font-size:16px; margin-top:4px; color:#cfe3d8; }
+  .addr { font-size:13.5px; margin-top:8px; color:#9fb4c7; line-height:1.5; }
+  .btn { display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-size:18px; font-weight:700; padding:15px; border-radius:14px; margin-top:12px; color:#fff; }
+  .wa { background:#22c064; }
+  .call { background:#2563eb; }
+  .row { display:flex; gap:12px; }
+  .row .btn { flex:1; font-size:15.5px; padding:13px 8px; }
+  .ghost { background:#16283f; border:1px solid #274a68; }
+  h2 { font-size:17px; margin:24px 4px 10px; color:#ffd34d; letter-spacing:.4px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .svc { background:#111c2e; border:1px solid #1f3a52; border-radius:14px; padding:14px 12px; }
+  .svc .ic { font-size:24px; }
+  .svc b { display:block; font-size:15px; margin-top:6px; }
+  .svc span { font-size:12.5px; color:#9fb4c7; line-height:1.45; display:block; margin-top:3px; }
+  .sell { margin-top:26px; background:#1a1408; border:1px dashed #8a6d1f; border-radius:14px; padding:15px; text-align:center; font-size:14px; line-height:1.6; color:#f3df9e; }
+  .sell a { color:#ffd34d; font-weight:700; }
+  .foot { text-align:center; font-size:12px; color:#64798c; margin-top:20px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="head">
+    <div class="logo">📱</div>
+    <h1>AL BADAR MOBILE</h1>
+    <div class="owner">Muhammad Hamza Nawaz</div>
+    <div class="addr">Shop No. 101, Sanawan, Tehsil Kot Addu,<br>District Muzaffargarh (HBL Bank ke qareeb)</div>
+  </div>
+
+  <a class="btn wa" href="https://wa.me/923400646576?text=Assalam-o-Alaikum%2C%20mujhe%20mobile%20ke%20baray%20me%20maloomat%20chahiye">💬 WhatsApp Par Rabta Karo</a>
+  <a class="btn call" href="tel:+923400646576">📞 Call Karo — 0340-0646576</a>
+  <div class="row">
+    <a class="btn ghost" href="#" onclick="saveContact(event)">⭐ Contact Save Karo</a>
+    <a class="btn ghost" href="#" onclick="shareCard(event)">↗️ Share Karo</a>
+  </div>
+  <a class="btn ghost" style="font-size:15.5px" href="https://www.google.com/maps/search/?api=1&query=Sanawan%2C+Kot+Addu%2C+Punjab%2C+Pakistan">📍 Dukaan Ka Rasta (Map)</a>
+
+  <h2>Hamari Services</h2>
+  <div class="grid">
+    <div class="svc"><div class="ic">📱</div><b>Naye Mobile</b><span>Har company ke naye mobile — asaan qiston par bhi dastiyab</span></div>
+    <div class="svc"><div class="ic">🛠️</div><b>Mobile Repairing</b><span>Har qisam ki kharabi ki tasalli-bakhsh repairing</span></div>
+    <div class="svc"><div class="ic">🖥️</div><b>Screen &amp; Battery</b><span>Original quality screen aur battery tabdeeli</span></div>
+    <div class="svc"><div class="ic">💾</div><b>Mobile Software</b><span>Software, flashing aur tamam software services</span></div>
+    <div class="svc"><div class="ic">🎧</div><b>Accessories</b><span>Charger, handfree, cover, protector aur bohat kuch</span></div>
+    <div class="svc"><div class="ic">💳</div><b>Load &amp; Packages</b><span>Har network ka load aur package facilities</span></div>
+  </div>
+
+  <div class="sell">
+    🏪 <b>Apni dukaan ka aisa hi digital card banwana hai?</b><br>
+    Aik link — WhatsApp button, call button, services aur pata ke sath.<br>
+    Sirf <b>Rs 1,500</b> se shuru. <a href="https://wa.me/923400646576?text=Assalam-o-Alaikum%2C%20mujhe%20apni%20dukaan%20ka%20digital%20card%20banwana%20hai">Order ke liye WhatsApp karein</a>
+  </div>
+
+  <div class="foot">AL BADAR MOBILE — Sanawan<br>Ye card share karein, kisi ke kaam aa sakta hai 🤝</div>
+</div>
+<script>
+function saveContact(e){
+  e.preventDefault();
+  var v = "BEGIN:VCARD\nVERSION:3.0\nFN:AL BADAR MOBILE\nORG:AL BADAR MOBILE\nTITLE:Muhammad Hamza Nawaz\nTEL;TYPE=CELL:+923400646576\nADR:;;Shop No. 101, Sanawan, Tehsil Kot Addu, District Muzaffargarh (Near HBL Bank);;;;Pakistan\nEND:VCARD";
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([v], {type:'text/vcard'}));
+  a.download = 'AL-BADAR-MOBILE.vcf';
+  a.click();
+}
+function shareCard(e){
+  e.preventDefault();
+  var data = {title:'AL BADAR MOBILE', text:'AL BADAR MOBILE — Sanawan. Naye mobile qiston par, repairing aur software. WhatsApp: 0340-0646576', url: location.href};
+  if (navigator.share) { navigator.share(data); }
+  else { navigator.clipboard.writeText(data.text + ' ' + data.url); alert('Link copy ho gaya — jahan chaho paste karke share kar do.'); }
+}
+</script>
+</body>
+</html>
