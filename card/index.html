@@ -37,7 +37,7 @@
     <div class="logo">📱</div>
     <h1>AL BADAR MOBILE</h1>
     <div class="owner">Muhammad Hamza Nawaz</div>
-    <div class="addr">Shop No. 101, Sanawan, Tehsil Kot Addu,<br>District Muzaffargarh (HBL Bank ke qareeb)</div>
+    <div class="addr">Shop No. 101, Sanawan, Tehsil Kot Addu,<br>District Muzaffargarh — Near HBL Bank</div>
   </div>
 
   <a class="btn wa" href="https://wa.me/923400646576?text=Assalam-o-Alaikum%2C%20mujhe%20mobile%20ke%20baray%20me%20maloomat%20chahiye">💬 WhatsApp Par Rabta Karo</a>
@@ -58,18 +58,12 @@
     <div class="svc"><div class="ic">💳</div><b>Load &amp; Packages</b><span>Har network ka load aur package facilities</span></div>
   </div>
 
-  <div class="sell">
-    🏪 <b>Apni dukaan ka aisa hi digital card banwana hai?</b><br>
-    Aik link — WhatsApp button, call button, services aur pata ke sath.<br>
-    Sirf <b>Rs 1,500</b> se shuru. <a href="https://wa.me/923400646576?text=Assalam-o-Alaikum%2C%20mujhe%20apni%20dukaan%20ka%20digital%20card%20banwana%20hai">Order ke liye WhatsApp karein</a>
-  </div>
-
   <div class="foot">AL BADAR MOBILE — Sanawan<br>Ye card share karein, kisi ke kaam aa sakta hai 🤝</div>
 </div>
 <script>
 function saveContact(e){
   e.preventDefault();
-  var v = "BEGIN:VCARD\nVERSION:3.0\nFN:AL BADAR MOBILE\nORG:AL BADAR MOBILE\nTITLE:Muhammad Hamza Nawaz\nTEL;TYPE=CELL:+923400646576\nADR:;;Shop No. 101, Sanawan, Tehsil Kot Addu, District Muzaffargarh (Near HBL Bank);;;;Pakistan\nEND:VCARD";
+  var v = "BEGIN:VCARD\nVERSION:3.0\nFN:AL BADAR MOBILE\nORG:AL BADAR MOBILE\nTITLE:Muhammad Hamza Nawaz\nTEL;TYPE=CELL:+923400646576\nADR:;;Shop No. 101, Sanawan, Tehsil Kot Addu, District Muzaffargarh, Near HBL Bank;;;;Pakistan\nEND:VCARD";
   var a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([v], {type:'text/vcard'}));
   a.download = 'AL-BADAR-MOBILE.vcf';
