@@ -55,6 +55,15 @@
   .v-no .big { color:#ff8f8f; }
   .v-unk { background:#1c2436; border:1px solid #4a5a78; }
   .v-unk .big { color:#b9c6da; }
+  .grp { background:#111c2e; border:1px solid #1f3a52; border-radius:16px; padding:16px; margin-top:14px; }
+  .grp h3 { font-size:16.5px; color:#ffd34d; }
+  .grp .sub2 { font-size:13px; color:#9fb4c7; margin-top:4px; line-height:1.5; }
+  .mitem { background:#0d1828; border:1px solid #1f3a52; border-radius:12px; padding:11px 13px; margin-top:8px; cursor:pointer; }
+  .mitem:active { border-color:#ffd34d; }
+  .mitem b { font-size:15.5px; display:block; }
+  .mitem span { font-size:13px; color:#9fb4c7; display:block; margin-top:2px; }
+  .more { width:100%; font-size:15px; font-weight:700; padding:12px; border-radius:12px; margin-top:10px; border:1px solid #274a68; background:#16283f; color:#ffd34d; cursor:pointer; }
+  .fwbox { font-size:14.5px; margin-top:14px; padding:12px; border-radius:12px; background:#3a2d08; border:1px solid #b08d1e; line-height:1.5; font-weight:700; text-align:center; }
   .foot { margin-top:26px; font-size:12.5px; color:#7c8da0; line-height:1.6; text-align:center; }
   .foot b { color:#9fb4c7; }
 </style>
@@ -100,7 +109,7 @@
   <div class="foot">
     Data: MEER Tool Pro model list.<br>
     Chip verify nahi hua ho to "verify nahi hua" likha aayega — andaza nahi lagaya gaya.<br>
-    <b>Build:</b> 2026-11-18 v1.0
+    <b>Build:</b> 2026-11-18 09:49 UTC
   </div>
 </div>
 
@@ -149,6 +158,25 @@ function compareVerdict(a, b) {
 function chipLabel(m) { return m[4] ? m[3] + " (" + m[4] + ")" : m[3]; }
 function esc(s) { return (s == null ? "" : String(s)).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 
+// matchLists(m): { unknown, match[], family[] }
+// match  = every OTHER model with the identical compare key
+//          (MT number for MediaTek; keyed vendor+chip otherwise)
+// family = MTK models with the same base MT number (letter suffix
+//          ignored, e.g. MT6789H <-> MT6789), excluding exact matches
+// unknown = looked-up model has no verified MT/key -> no lists
+function matchLists(m) {
+  const key = m[12];
+  if (!key) return { unknown: true, match: [], family: [] };
+  const match = [], family = [];
+  const base = (m[13] === 1 && m[4]) ? mtBase(m[4]) : null;
+  for (const o of DB) {
+    if (o === m) continue;
+    if (o[12] && o[12] === key) { match.push(o); continue; }
+    if (base && o[13] === 1 && o[4] && mtBase(o[4]) === base) family.push(o);
+  }
+  return { unknown: false, match: match, family: family };
+}
+
 if (typeof document !== "undefined") {
   function showTab(t) {
     document.getElementById("panelLook").classList.toggle("on", t === "look");
@@ -183,9 +211,38 @@ if (typeof document !== "undefined") {
     if (q.trim().length >= 2 && hits.length === 0) list.innerHTML = '<div class="hint">Koi model nahi mila — code ya naam dobara check karo.</div>';
   }
   function pickLook(i) {
-    document.getElementById("detail").innerHTML = detailHtml(DB[i]);
+    curLook = i; expMatch = false; expFam = false;
+    renderDetail();
     document.getElementById("results").innerHTML = "";
     document.getElementById("detail").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+  let curLook = -1, expMatch = false, expFam = false;
+  function renderDetail() {
+    document.getElementById("detail").innerHTML = detailHtml(DB[curLook]) + matchGroupsHtml(DB[curLook]);
+  }
+  function expandList(which) {
+    if (which === "match") expMatch = true; else expFam = true;
+    renderDetail();
+  }
+  function groupHtml(title, sub, list, which, expanded, emptyMsg) {
+    const shown = expanded ? list : list.slice(0, 12);
+    let h = '<div class="grp"><h3>' + title + ' (' + list.length + ')</h3><div class="sub2">' + sub + '</div>';
+    if (list.length === 0) h += '<div class="sub2" style="margin-top:8px">' + emptyMsg + '</div>';
+    for (const o of shown) {
+      h += '<div class="mitem" onclick="pickLook(' + DB.indexOf(o) + ')"><b>' + esc(o[1]) + '</b><span>' + esc(o[0]) + ' · ' + esc(o[2] === "unknown" ? "—" : o[2]) + ' · ' + esc(chipLabel(o)) + '</span></div>';
+    }
+    if (!expanded && list.length > 12) h += '<button class="more" onclick="expandList(\'' + which + '\')">aur dekho (' + (list.length - 12) + ')</button>';
+    h += '</div>';
+    return h;
+  }
+  function matchGroupsHtml(m) {
+    const r = matchLists(m);
+    if (r.unknown) return '<div class="grp"><div class="sub2">Is model ka MT verify nahi hua — match list nahi dikha sakte.</div></div>';
+    let h = "";
+    h += groupHtml("Ye models laga sakte ho (same chip)", "In ka chip bilkul aik hai — tool me in me se koi bhi select karke kaam ho sakta hai.", r.match, "match", expMatch, "Is chip wala koi aur model list me nahi hai.");
+    h += groupHtml("Qareebi family (aksar kaam ho jata hai)", "Aik hi chip family — aksar kaam ho jata hai, try karo.", r.family, "family", expFam, "Is family ka koi aur model list me nahi hai.");
+    h += '<div class="fwbox">⚠ ' + FW_WARN + '</div>';
+    return h;
   }
   let selA = null, selB = null;
   function onSearchCmp(which) {
